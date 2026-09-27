@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Q&A Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% include 'sidebar.html' %}
+    <div class="container">
+        <h1>Assistant Q&A</h1>
+        <p><a href="{{ url_for('index') }}">← Retour à l'accueil</a></p>
+        <hr>
+        <form method="POST" class="upload-form">
+            <input type="text" name="question" placeholder="Posez votre question..." required style="padding: 8px; width: 80%;">
+            <button type="submit" class="submit-btn">Envoyer</button>
+        </form>
+        {% if answer %}
+        <div class="alert-box" style="margin-top: 20px;"><p>{{ answer }}</p></div>
+        {% endif %}
+    </div>
+</body>
+</html>

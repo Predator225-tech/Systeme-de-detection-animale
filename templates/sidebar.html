@@ -1,0 +1,9 @@
+<!-- templates/sidebar.html -->
+<div class="sidebar">
+    <h2>Detection d'Animaux</h2>
+    <a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">Accueil</a>
+    <a href="{{ url_for('test_page') }}" class="{% if request.endpoint == 'test_page' %}active{% endif %}">Test / Analyse</a>
+    <a href="{{ url_for('seeker') }}" class="{% if request.endpoint == 'seeker' %}active{% endif %}">Data Seeker</a>
+    <a href="{{ url_for('training') }}" class="{% if request.endpoint == 'training' %}active{% endif %}">Training</a>
+    <a href="{{ url_for('qa') }}" class="{% if request.endpoint == 'qa' %}active{% endif %}">Q&A</a>
+</div>

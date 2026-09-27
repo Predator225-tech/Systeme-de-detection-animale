@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Préfaît</title>
+    <!-- Lien vers votre feuille de style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Barre latérale (Sidebar) -->
+    {% include 'sidebar.html' %}
+    <!-- Contenu Principal -->
+    <div class="main-content">
+        <div class="container">
+            <h1>Bienvenue sur Detection d animaux</h1>
+            <p class="subtitle">Sélectionnez le mode de traitement ou lancez une analyse d'image</p>
+
+            <!-- Formulaire de choix et d'aiguillage -->
+            <form action="{{ url_for('test_page') }}" method="GET" class="upload-form">
+                <div style="width: 100%; text-align: left;">
+                    <label for="model_choice" style="font-weight: bold; color: #475569; display: block; margin-bottom: 8px;">
+                        Choisir le modèle de traitement :
+                    </label>
+                    <select name="model_choice" id="model_choice" style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; font-size: 15px;">
+                        <option value="online">Modèle En Ligne (API)</option>
+                        <option value="yolov8">YOLOv8 Local (Modèle personnalisé)</option>
+                        <option value="model_v2">Modèle V2 Avancé</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn" style="width: 100%;">
+                    Commencer l'analyse
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

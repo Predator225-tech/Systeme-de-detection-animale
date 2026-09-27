@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test & Analyse - Préfaît</title>
+    <!-- Lien vers le fichier CSS séparé -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Barre latérale (Sidebar) à gauche -->
+    {% include 'sidebar.html' %}
+    <!-- Contenu Principal à droite -->
+    <div class="main-content">
+        <div class="container">
+            <h1>Projet de Détection d'Animaux</h1>
+            <p class="subtitle">Sélectionnez une image de votre dataset pour identifier les animaux présents.</p>
+
+            <!-- CORRECTION : action pointe vers test_page au lieu de / -->
+            <form action="{{ url_for('test_page') }}" method="POST" enctype="multipart/form-data" class="upload-form">
+                
+                <div class="file-input-container">
+                    <input type="file" name="image" id="image" accept="image/*" required>
+                </div>
+
+                <!-- Sélecteur de modèle (Local / En ligne) -->
+                <div class="model-selector" style="margin: 20px 0;">
+                    <label for="model_choice"><strong>Choisir le moteur d'IA :</strong></label>
+                    <select name="model_choice" id="model_choice" style="padding: 8px; margin-left: 10px; border-radius: 5px;">
+                        <option value="online" {% if model_choice == 'online' %}selected{% endif %}>Gemini (En ligne - Très précis)</option>
+                        <option value="local" {% if model_choice == 'local' %}selected{% endif %}>YOLOv8 (Local - Instantané)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">Analyser l'image</button>
+            </form>
+
+            <!-- Section d'affichage du résultat si une image a été traitée -->
+            {% if original_image or result_image %}
+            <div class="results-section">
+                <h2>Résultats de l'analyse</h2>
+                
+                <!-- Affichage textuel du résultat -->
+                {% if animal_name %}
+                <div class="alert-box">
+                    <p><strong>{{ animal_name }}</strong></p>
+                </div>
+                {% endif %}
+
+                <div class="images-grid">
+                    {% if original_image %}
+                    <div class="image-box">
+                        <h3>Votre image originale</h3>
+                        <img src="{{ url_for('static', filename='uploads/' + original_image) }}" alt="Originale">
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Lien vers le fichier JavaScript dédié pour le chronomètre -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

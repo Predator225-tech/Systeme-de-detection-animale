@@ -1,0 +1,7 @@
+.venv/
+venv/
+__pycache__/
+*.pt
+yolov8n.pt
+dataset/
+static/uploads/*
